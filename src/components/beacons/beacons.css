@@ -1,0 +1,28 @@
+.beacon-panel {
+  border: 2px solid #ccc;
+  border-radius: 5px;
+  padding: 20px;
+}
+
+.beacon-panel h5 {
+  font-weight: bold;
+}
+
+.beacon-detail {
+  padding: 2px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  font-size: 0.9em;
+}
+
+.active-icon {
+  font-size: 0.8em;
+}
+
+.active-beacon {
+  color: green;
+}
+
+.inactive-beacon {
+  color: red;
+}
