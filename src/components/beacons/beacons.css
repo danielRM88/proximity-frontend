@@ -4,6 +4,12 @@
   padding: 20px;
 }
 
+.beacon-row {
+  border: 2px solid #ccc;
+  border-radius: 5px;
+  padding: 10px;
+}
+
 .beacon-panel h5 {
   font-weight: bold;
 }
@@ -25,4 +31,15 @@
 
 .inactive-beacon {
   color: red;
+}
+
+.error {
+  color: red;
+  margin: 10px red;
+}
+
+.required:after { content:" *"; }
+
+.left-separator {
+  border-left: 1px solid #ccc;
 }

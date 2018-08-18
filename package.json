@@ -15,7 +15,10 @@
     "react-icons": "^3.0.5",
     "react-loading": "^2.0.3",
     "react-refetch": "^2.0.0",
+    "react-router-dom": "^4.3.1",
     "react-scripts": "1.1.4",
+    "react-select": "^2.0.0",
+    "react-select-plus": "^1.0.0-rc.3.patch10",
     "react-tooltip": "^3.6.1"
   },
   "scripts": {

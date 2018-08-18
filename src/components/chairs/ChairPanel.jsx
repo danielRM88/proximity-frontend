@@ -3,13 +3,15 @@ import { connect } from 'react-refetch';
 import Loading from './../utility/Loading';
 import Error from './../utility/Error';
 import ChairDetail from './ChairDetail';
+import { Link } from 'react-router-dom';
 import '../../App.css'
 
 import {config} from '../../config.js'
 
 class ChairPanel extends Component {
   render() {
-    let { chairFetch, chair_id } = this.props;
+    let chairId = this.props.match.params.id
+    let { chairFetch } = this.props;
 
     if (chairFetch.pending) {
       return <Loading />
@@ -39,11 +41,14 @@ class ChairPanel extends Component {
           </header>
           <div className="row">
             <div className="col-sm-4">
-              <ChairDetail beacons={beacons} chair_id={chair_id}/>
+              <ChairDetail beacons={beacons} chair_id={chairId}/>
             </div>
             <div className="col-sm-8">
-              <ChairDetail beacons={beacons} chair_id={chair_id} has_filter={hasFilter}/>
+              <ChairDetail beacons={beacons} chair_id={chairId} has_filter={hasFilter}/>
             </div>
+          </div>
+          <div className="text-center">
+            <Link to="/chairs" className="btn btn-primary"> Back </Link>
           </div>
         </div>
       );
@@ -53,7 +58,6 @@ class ChairPanel extends Component {
 
 export default connect(props => ({
   chairFetch: {
-    url: `${config.server}:${config.port}/chairs/${props.chair_id}`,
-    refreshInterval: 500
+    url: `${config.server}:${config.port}/chairs/${props.match.params.id}`
   }
 })) (ChairPanel)

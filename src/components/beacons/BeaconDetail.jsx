@@ -7,10 +7,8 @@ class BeaconDetail extends Component {
     let { beacon } = this.props;
 
     let className = "active-icon active-beacon";
-    let status = "Active";
     if(!beacon.active) {
       className = "active-icon inactive-beacon";
-      status = "Inactive";
     }
 
     return(

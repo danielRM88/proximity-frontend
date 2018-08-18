@@ -3,7 +3,7 @@ import { Chart } from "react-google-charts";
 import { connect } from 'react-refetch';
 import Loading from './../utility/Loading';
 import Error from './../utility/Error';
-import BeaconDetail from './BeaconDetail';
+// import BeaconDetail from './BeaconDetail';
 import './beacons.css';
 
 import {config} from '../../config.js'
