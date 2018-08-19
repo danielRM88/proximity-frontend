@@ -4,8 +4,11 @@ import App from './components/App';
 import BeaconListContainer from './containers/beacons/BeaconListContainer';
 import BeaconNewContainer from './containers/beacons/BeaconNewContainer';
 import BeaconEditContainer from './containers/beacons/BeaconEditContainer';
+import ChairNewContainer from './containers/chairs/ChairNewContainer';
+import ChairEditContainer from './containers/chairs/ChairEditContainer';
+import ChairListContainer from './containers/chairs/ChairListContainer';
 import { getBeaconsRequest, getBeaconRequest } from './actions/beaconsActions';
-import { getChairsRequest } from './actions/chairsActions';
+import { getChairsRequest, getChairRequest } from './actions/chairsActions';
 
 import createHistory from "history/createBrowserHistory";
 import store from "./store/store";
@@ -38,6 +41,15 @@ export default () => {
         <Route exact path='/beacons' render={ () => {
               store.dispatch(getBeaconsRequest());
               return <BeaconListContainer />
+        }}/>
+        <Route exact path='/chairs/new' component={ChairNewContainer}/>
+        <Route exact path='/chairs/:id/edit' render={ (props) => {
+              store.dispatch(getChairRequest(props.match.params.id));
+              return <ChairEditContainer />
+        }}/>
+        <Route exact path='/chairs' render={ () => {
+              store.dispatch(getChairsRequest());
+              return <ChairListContainer />
         }}/>
       </App>
     </Router>

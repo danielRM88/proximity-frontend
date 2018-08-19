@@ -18,7 +18,7 @@ import { getBeaconsRequest,
 import { GET_BEACONS_REQUEST, GET_BEACON_REQUEST, CREATE_BEACON_REQUEST, UPDATE_BEACON_REQUEST, DELETE_BEACON_REQUEST } from '../actions/beaconsActions';
 import { setMessage, removeMessage } from '../actions/messagesActions';
 import { browserHistory, hashHistory } from 'react-router-dom';
-// import createHistory from 'history/createBrowserHistory';
+import store from "../store/store";
 import { processErrorMessages } from '../utility/util';
 
 const beaconsMiddleware = store => next => action => {
@@ -130,6 +130,7 @@ function deleteBeaconMiddlewareAction(next, action) {
   const success = (response) => {
     next(setMessage(["Beacon deleted successfully"], "success")); // not gonna show because of route change ??? how to fix ???
     next(deleteBeaconSuccess());
+    store.dispatch(getBeaconsRequest());
     // hashHistory.push('/beacons');
   };
 

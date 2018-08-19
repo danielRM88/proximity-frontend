@@ -24,6 +24,8 @@ export const mapper = string => {
   let translation = string
   if(string == "mac_address") {
     translation = "Mac Address";
+  } else if (string == "name") {
+    translation = "Name";
   }
 
   return translation;

@@ -32,7 +32,7 @@ class BeaconList extends Component {
                       <td>{beacon.model}</td>
                       <td>{beacon.active}</td>
                       <td><Link to={`/beacons/${beacon.id}/edit`} className="btn btn-sm btn-primary"> Edit </Link></td>
-                      <td><a href="#" onClick={(event) => this.handleClick(event, beacon.id)} className="btn btn-sm btn-danger"> Delete </a></td>
+                      <td><button onClick={(event) => this.handleClick(event, beacon.id)} className="btn btn-sm btn-danger"> Delete </button></td>
                     </tr>
                   )
                 }) }
