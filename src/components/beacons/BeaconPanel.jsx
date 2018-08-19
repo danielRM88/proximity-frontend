@@ -6,7 +6,7 @@ import Error from './../utility/Error';
 // import BeaconDetail from './BeaconDetail';
 import './beacons.css';
 
-import {config} from '../../config.js'
+import {config} from '../../config.js';
 
 class BeaconPanel extends Component {
   render() {
