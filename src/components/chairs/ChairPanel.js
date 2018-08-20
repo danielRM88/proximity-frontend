@@ -1,12 +1,13 @@
 import React, { Component } from 'react';
-import BeaconPanelContainer from '../../containers/beacons/BeaconPanelContainer'
-import FilterPanelContainer from '../../containers/chairs/FilterPanelContainer'
+import BeaconPanelContainer from '../../containers/beacons/BeaconPanelContainer';
+import FilterPanelContainer from '../../containers/chairs/FilterPanelContainer';
+import Seated from './Seated';
 import { Link } from 'react-router-dom';
 import Loading from '../../utility/Loading';
 
 class ChairPanel extends Component {
   render() {
-    const { chairId, chairName, beaconsIds, hasFilter, calibrated, loading } = this.props;
+    const { chairId, chairName, beaconsIds, hasFilter, calibrated, loading, seated } = this.props;
     if(!loading) {
       return (
         <div className="panel">
@@ -15,6 +16,7 @@ class ChairPanel extends Component {
           </header>
           <div className="row">
             <div className="col-sm-4">
+              <Seated seated={seated} />
             </div>
             <div className="col-sm-8">
               <BeaconPanelContainer beaconsIds={beaconsIds} chairId={chairId}/>

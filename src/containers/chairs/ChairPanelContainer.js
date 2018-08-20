@@ -11,6 +11,7 @@ const mapStateToProps = (state) => {
   let beaconsIds = [];
   let hasFilter;
   let calibrated;
+  let seated = false;
 
   if (chair !== undefined) {
     chairId = chair.id;
@@ -33,6 +34,7 @@ const mapStateToProps = (state) => {
     beaconsIds,
     hasFilter,
     calibrated,
+    seated,
     loading
   })
 };
