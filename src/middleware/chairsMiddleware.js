@@ -1,4 +1,4 @@
-import { createChairService, getChairService, getChairsService, updateChairService, deleteChairService, getChairDataService, startChairCalibrationService, getCalibrationProgressService } from '../services/chairsService'
+import { createChairService, getChairService, getChairsService, updateChairService, deleteChairService, getChairDataService, startChairCalibrationService, getCalibrationProgressService, updateFilterProcessErrorService } from '../services/chairsService'
 import { getChairsRequest,
          getChairsSuccess,
          getChairsFailure,
@@ -22,7 +22,10 @@ import { getChairsRequest,
          startChairCalibrationFailure,
          getCalibrationProgressRequest,
          getCalibrationProgressSuccess,
-         getCalibrationProgressFailure
+         getCalibrationProgressFailure,
+         updateFilterProcessErrorRequest,
+         updateFilterProcessErrorSuccess,
+         updateFilterProcessErrorFailure
        } from '../actions/chairsActions';
 import { GET_CHAIRS_REQUEST, 
          GET_CHAIR_REQUEST, 
@@ -32,7 +35,8 @@ import { GET_CHAIRS_REQUEST,
          GET_CHAIR_DATA_REQUEST, 
          REFRESH_CHAIR_DATA_REQUEST,
          START_CHAIR_CALIBRATION_REQUEST,
-         GET_CALIBRATION_PROGRESS_REQUEST } from '../actions/chairsActions';
+         GET_CALIBRATION_PROGRESS_REQUEST,
+         UPDATE_FILTER_PROCESS_ERROR_REQUEST } from '../actions/chairsActions';
 import { setMessage, removeMessage } from '../actions/messagesActions';
 import { browserHistory, hashHistory } from 'react-router-dom';
 import { processErrorMessages } from '../utility/util';
@@ -68,9 +72,38 @@ const chairsMiddleware = store => next => action => {
     case GET_CALIBRATION_PROGRESS_REQUEST:
       getCalibrationProgressMiddlewareAction(next, action);
       break
+    case UPDATE_FILTER_PROCESS_ERROR_REQUEST:
+      updateFilterProcessErrorMiddlewareAction(next, action);
+      break
     default:
       break
   }
+};
+
+function updateFilterProcessErrorMiddlewareAction(next, action) {
+  const error = (err) => {
+    let errors = ["The filter could not be updated"];
+    
+    let body = err.response.body;
+    let errorJson = {};
+    if(body != undefined) {
+      errorJson = body.errors
+    }
+    errors = errors.concat(processErrorMessages(errorJson));
+
+    next(setMessage(errors, "error"));
+    next(updateFilterProcessErrorFailure(err.message));
+  };
+
+  const success = () => {
+    next(setMessage(["Filter updated successfully"], "success")); // not gonna show because of route change ??? how to fix ???
+    next(updateFilterProcessErrorSuccess());
+    // if (action.redirect) {
+    //   hashHistory.push('/chairs/'+action.payload.chair.id;
+    // }
+  };
+
+  updateFilterProcessErrorService(action.payload.chairId, action.payload.processError, success, error);
 };
 
 function getCalibrationProgressMiddlewareAction(next, action) {

@@ -10,7 +10,7 @@ class Seated extends Component {
       answer = "YES";
     }
     return (
-      <div className="container">
+      <div className="containerl">
         <header>
           <h5>Seated</h5>
         </header>

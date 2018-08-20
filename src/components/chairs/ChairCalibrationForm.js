@@ -36,7 +36,7 @@ class ChairCalibrationForm extends Component {
         <form onSubmit={(event) => this.handleClick(event, chairId)}>
           <div className="form-group">
             <label className="required" htmlFor="noRecords">No. of Measurements</label>
-            <input type="text" name="noRecords" className="form-control" defaultValue={noRecords} onChange={(event) => {this.handleNoRecordsChange(event, this)}} autoFocus required/>
+            <input type="number" step="1" name="noRecords" className="form-control" defaultValue={noRecords} onChange={(event) => {this.handleNoRecordsChange(event, this)}} autoFocus required/>
           </div>
           <div className="text-center">
             <button type="submit" className="btn btn-primary"> Start Calibration </button>

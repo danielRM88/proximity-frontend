@@ -1,5 +1,20 @@
 import request from 'superagent';
 
+export function updateFilterProcessErrorService(chairId, processError, success, error) {
+  request
+    .put('http://localhost:3000/chairs/'+chairId+'/update_filter_process_noise')
+    .set('Content-Type', 'application/json')
+    .send({ process_error: processError })
+    .end((err, res) => {
+      if (err) {
+        error(err);
+      } else {
+        const response = JSON.parse(res.text);
+        success(response);
+      }
+    })
+};
+
 export function getCalibrationProgressService(chairId, success, error) {
   request
     .get('http://localhost:3000/chairs/'+chairId+'/fetch_calibration_progress')

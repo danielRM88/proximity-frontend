@@ -6,6 +6,7 @@ import { UPDATE_CHAIR_REQUEST, UPDATE_CHAIR_SUCCESS, UPDATE_CHAIR_FAILURE } from
 import { GET_CHAIR_DATA_REQUEST, GET_CHAIR_DATA_SUCCESS, GET_CHAIR_DATA_FAILURE, REFRESH_CHAIR_DATA_REQUEST } from "../actions/chairsActions"
 import { START_CHAIR_CALIBRATION_REQUEST, START_CHAIR_CALIBRATION_SUCCESS, START_CHAIR_CALIBRATION_FAILURE } from "../actions/chairsActions"
 import { GET_CALIBRATION_PROGRESS_REQUEST, GET_CALIBRATION_PROGRESS_SUCCESS, GET_CALIBRATION_PROGRESS_FAILURE } from "../actions/chairsActions"
+import { UPDATE_FILTER_PROCESS_ERROR_REQUEST, UPDATE_FILTER_PROCESS_ERROR_SUCCESS, UPDATE_FILTER_PROCESS_ERROR_FAILURE } from "../actions/chairsActions"
 
 const initialState = {
   index: {chairs: [], loading: false, error: undefined},
@@ -16,6 +17,17 @@ const initialState = {
 
 const chairs = (state = initialState, action) => {
   switch (action.type) {
+    case UPDATE_FILTER_PROCESS_ERROR_REQUEST:
+      console.log(action);
+      return state;
+    case UPDATE_FILTER_PROCESS_ERROR_SUCCESS:
+      return Object.assign({}, state, {
+        edit: {...state.edit, ...action.payload}
+      });
+    case UPDATE_FILTER_PROCESS_ERROR_FAILURE:
+      return Object.assign({}, state, {
+        edit: {...state.edit, ...action.payload}
+      });
     case GET_CALIBRATION_PROGRESS_REQUEST:
       return state;
     case GET_CALIBRATION_PROGRESS_SUCCESS:

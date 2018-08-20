@@ -1,6 +1,6 @@
 import ChairPanel from '../../components/chairs/ChairPanel'
 import { connect } from 'react-redux';
-import { refreshChairDataRequest } from '../../actions/chairsActions';
+import { refreshChairDataRequest, updateFilterProcessErrorRequest } from '../../actions/chairsActions';
 
 const mapStateToProps = (state) => {
   const editState = state.chairs.edit;
@@ -12,6 +12,7 @@ const mapStateToProps = (state) => {
   let hasFilter;
   let calibrated;
   let seated = false;
+  let processNoise;
 
   if (chair !== undefined) {
     chairId = chair.id;
@@ -26,6 +27,10 @@ const mapStateToProps = (state) => {
 
     hasFilter = chair.has_filter;
     calibrated = chair.calibrated;
+
+    if(hasFilter) {
+      processNoise = chair.filter.V1[0][0]
+    }
   }
 
   return ({
@@ -35,6 +40,7 @@ const mapStateToProps = (state) => {
     hasFilter,
     calibrated,
     seated,
+    processNoise,
     loading
   })
 };
@@ -44,6 +50,9 @@ const mapDispatchToProps = (dispatch) => ({
     if(chairId !== undefined) {
       dispatch(refreshChairDataRequest(chairId, 200));
     }
+  },
+  updateFilter: (chairId, processNoise) => {
+    dispatch(updateFilterProcessErrorRequest(chairId, processNoise));
   }
 });
 

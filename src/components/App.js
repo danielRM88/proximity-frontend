@@ -7,7 +7,7 @@ class App extends Component {
     return (
       <div>
         <NavBar />
-        <div className="containerl">
+        <div className="container">
           <MessagesContainer />
           {this.props.children}
         </div>

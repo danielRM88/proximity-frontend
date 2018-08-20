@@ -1,3 +1,38 @@
+export const UPDATE_FILTER_PROCESS_ERROR_REQUEST = 'UPDATE_FILTER_PROCESS_ERROR_REQUEST'
+export const UPDATE_FILTER_PROCESS_ERROR_SUCCESS = 'UPDATE_FILTER_PROCESS_ERROR_SUCCESS'
+export const UPDATE_FILTER_PROCESS_ERROR_FAILURE = 'UPDATE_FILTER_PROCESS_ERROR_FAILURE'
+
+export function updateFilterProcessErrorRequest(chairId, processError) {
+  return {
+    type: UPDATE_FILTER_PROCESS_ERROR_REQUEST,
+    payload: {
+      loading: true,
+      chairId,
+      processError
+    }
+  }
+}
+
+export function updateFilterProcessErrorSuccess() {
+  return {
+    type: UPDATE_FILTER_PROCESS_ERROR_SUCCESS,
+    payload: {
+      loading: false
+    }
+  }
+}
+
+export function updateFilterProcessErrorFailure(message) {
+  return {
+    type: UPDATE_FILTER_PROCESS_ERROR_FAILURE,
+    payload: {
+      loading: false,
+      message
+    }
+  }
+}
+
+
 export const GET_CALIBRATION_PROGRESS_REQUEST = 'GET_CALIBRATION_PROGRESS_REQUEST'
 export const GET_CALIBRATION_PROGRESS_SUCCESS = 'GET_CALIBRATION_PROGRESS_SUCCESS'
 export const GET_CALIBRATION_PROGRESS_FAILURE = 'GET_CALIBRATION_PROGRESS_FAILURE'
