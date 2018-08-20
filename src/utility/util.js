@@ -26,6 +26,8 @@ export const mapper = string => {
     translation = "Mac Address";
   } else if (string == "name") {
     translation = "Name";
+  } else if (string == "records_to_calibrate") {
+    translation = "No. of Measurements";
   }
 
   return translation;

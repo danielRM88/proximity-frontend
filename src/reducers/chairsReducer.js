@@ -4,6 +4,8 @@ import { DELETE_CHAIR_REQUEST, DELETE_CHAIR_SUCCESS, DELETE_CHAIR_FAILURE } from
 import { GET_CHAIR_REQUEST, GET_CHAIR_SUCCESS, GET_CHAIR_FAILURE } from "../actions/chairsActions"
 import { UPDATE_CHAIR_REQUEST, UPDATE_CHAIR_SUCCESS, UPDATE_CHAIR_FAILURE } from "../actions/chairsActions"
 import { GET_CHAIR_DATA_REQUEST, GET_CHAIR_DATA_SUCCESS, GET_CHAIR_DATA_FAILURE, REFRESH_CHAIR_DATA_REQUEST } from "../actions/chairsActions"
+import { START_CHAIR_CALIBRATION_REQUEST, START_CHAIR_CALIBRATION_SUCCESS, START_CHAIR_CALIBRATION_FAILURE } from "../actions/chairsActions"
+import { GET_CALIBRATION_PROGRESS_REQUEST, GET_CALIBRATION_PROGRESS_SUCCESS, GET_CALIBRATION_PROGRESS_FAILURE } from "../actions/chairsActions"
 
 const initialState = {
   index: {chairs: [], loading: false, error: undefined},
@@ -14,19 +16,49 @@ const initialState = {
 
 const chairs = (state = initialState, action) => {
   switch (action.type) {
+    case GET_CALIBRATION_PROGRESS_REQUEST:
+      return state;
+    case GET_CALIBRATION_PROGRESS_SUCCESS:
+      return Object.assign({}, state, {
+        edit: {...state.edit, 
+                  loading: action.payload.loading, 
+                  chair: { ...state.edit.chair, 
+                              calibration: {...state.edit.chair.calibration, 
+                                ongoing: action.payload.ongoing,
+                                progress: action.payload.progress
+                              } 
+                  }
+              }
+      });
+    case GET_CALIBRATION_PROGRESS_FAILURE:
+      return Object.assign({}, state, {
+        edit: {...state.edit, ...action.payload}
+      });
+    case START_CHAIR_CALIBRATION_REQUEST:
+      return Object.assign({}, state, {
+        edit: {...state.edit, ...action.payload}
+      });
+    case START_CHAIR_CALIBRATION_SUCCESS:
+      return Object.assign({}, state, {
+        edit: {...state.edit, ...action.payload}
+      });
+    case START_CHAIR_CALIBRATION_FAILURE:
+      return Object.assign({}, state, {
+        edit: {...state.edit, ...action.payload}
+      });
     case REFRESH_CHAIR_DATA_REQUEST:
       return state
     case GET_CHAIR_DATA_REQUEST:
       return Object.assign({}, state, {
-        panel: {...state.index, ...action.payload, predictions: []}
+        panel: {...state.panel, ...action.payload, predictions: []}
       });
     case GET_CHAIR_DATA_SUCCESS:
       return Object.assign({}, state, {
-        panel: {...state.index, ...action.payload}
+        panel: {...state.panel, ...action.payload}
       });
     case GET_CHAIR_DATA_FAILURE:
       return Object.assign({}, state, {
-        panel: {...state.index, ...action.payload}
+        panel: {...state.panel, ...action.payload}
       });
     case GET_CHAIRS_REQUEST:
       return Object.assign({}, state, {

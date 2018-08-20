@@ -1,5 +1,34 @@
 import request from 'superagent';
 
+export function getCalibrationProgressService(chairId, success, error) {
+  request
+    .get('http://localhost:3000/chairs/'+chairId+'/fetch_calibration_progress')
+    .set('Content-Type', 'application/json')
+    .end((err, res) => {
+      if (err) {
+        error(err);
+      } else {
+        const response = JSON.parse(res.text);
+        success(response);
+      }
+    })
+};
+
+export function startChairCalibrationService(calibration, success, error) {
+  request
+    .post('http://localhost:3000/chairs/'+calibration.chair_id+'/start_calibration')
+    .set('Content-Type', 'application/json')
+    .send({ calibration: calibration })
+    .end((err, res) => {
+      if (err) {
+        error(err);
+      } else {
+        const response = JSON.parse(res.text);
+        success(response);
+      }
+    })
+};
+
 export function getChairDataService(chairId, limit, success, error) {
   request
     .get('http://localhost:3000/chairs/'+chairId+'/predictions')

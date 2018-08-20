@@ -1,3 +1,75 @@
+export const GET_CALIBRATION_PROGRESS_REQUEST = 'GET_CALIBRATION_PROGRESS_REQUEST'
+export const GET_CALIBRATION_PROGRESS_SUCCESS = 'GET_CALIBRATION_PROGRESS_SUCCESS'
+export const GET_CALIBRATION_PROGRESS_FAILURE = 'GET_CALIBRATION_PROGRESS_FAILURE'
+
+export function getCalibrationProgressRequest(chairId) {
+  return {
+    type: GET_CALIBRATION_PROGRESS_REQUEST,
+    payload: {
+      loading: true,
+      chairId
+    }
+  }
+}
+
+export function getCalibrationProgressSuccess(response) {
+  return {
+    type: GET_CALIBRATION_PROGRESS_SUCCESS,
+    payload: {
+      loading: false,
+      progress: response.progress,
+      ongoing: response.ongoing,
+      calibrated: response.calibrated
+    }
+  }
+}
+
+export function getCalibrationProgressFailure(message) {
+  return {
+    type: GET_CALIBRATION_PROGRESS_FAILURE,
+    payload: {
+      loading: false,
+      message
+    }
+  }
+}
+
+
+export const START_CHAIR_CALIBRATION_REQUEST = 'START_CHAIR_CALIBRATION_REQUEST'
+export const START_CHAIR_CALIBRATION_SUCCESS = 'START_CHAIR_CALIBRATION_SUCCESS'
+export const START_CHAIR_CALIBRATION_FAILURE = 'START_CHAIR_CALIBRATION_FAILURE'
+
+export function startChairCalibrationRequest(calibration) {
+  return {
+    type: START_CHAIR_CALIBRATION_REQUEST,
+    payload: {
+      loading: true,
+      calibration
+    }
+  }
+}
+
+export function startChairCalibrationSuccess(chair) {
+  return {
+    type: START_CHAIR_CALIBRATION_SUCCESS,
+    payload: {
+      loading: false,
+      chair
+    }
+  }
+}
+
+export function startChairCalibrationFailure(message) {
+  return {
+    type: START_CHAIR_CALIBRATION_FAILURE,
+    payload: {
+      loading: false,
+      message
+    }
+  }
+}
+
+
 export const REFRESH_CHAIR_DATA_REQUEST = 'REFRESH_CHAIR_DATA_REQUEST'
 
 export function refreshChairDataRequest(chairId, limit) {

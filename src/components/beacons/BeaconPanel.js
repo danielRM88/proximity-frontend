@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { Chart } from 'react-google-charts';
-import Loading from '../../utility/Loading';
+import Loading from '../Loading';
 
 class BeaconPanel extends Component {
   componentDidMount() {

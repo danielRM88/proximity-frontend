@@ -1,4 +1,4 @@
-import { createChairService, getChairService, getChairsService, updateChairService, deleteChairService, getChairDataService } from '../services/chairsService'
+import { createChairService, getChairService, getChairsService, updateChairService, deleteChairService, getChairDataService, startChairCalibrationService, getCalibrationProgressService } from '../services/chairsService'
 import { getChairsRequest,
          getChairsSuccess,
          getChairsFailure,
@@ -16,7 +16,13 @@ import { getChairsRequest,
          deleteChairFailure,
          getChairDataRequest,
          getChairDataSuccess,
-         getChairDataFailure
+         getChairDataFailure,
+         startChairCalibrationRequest,
+         startChairCalibrationSuccess,
+         startChairCalibrationFailure,
+         getCalibrationProgressRequest,
+         getCalibrationProgressSuccess,
+         getCalibrationProgressFailure
        } from '../actions/chairsActions';
 import { GET_CHAIRS_REQUEST, 
          GET_CHAIR_REQUEST, 
@@ -24,7 +30,9 @@ import { GET_CHAIRS_REQUEST,
          UPDATE_CHAIR_REQUEST, 
          DELETE_CHAIR_REQUEST,
          GET_CHAIR_DATA_REQUEST, 
-         REFRESH_CHAIR_DATA_REQUEST } from '../actions/chairsActions';
+         REFRESH_CHAIR_DATA_REQUEST,
+         START_CHAIR_CALIBRATION_REQUEST,
+         GET_CALIBRATION_PROGRESS_REQUEST } from '../actions/chairsActions';
 import { setMessage, removeMessage } from '../actions/messagesActions';
 import { browserHistory, hashHistory } from 'react-router-dom';
 import { processErrorMessages } from '../utility/util';
@@ -54,10 +62,54 @@ const chairsMiddleware = store => next => action => {
     case REFRESH_CHAIR_DATA_REQUEST:
       getChairDataMiddlewareAction(next, action);
       break
+    case START_CHAIR_CALIBRATION_REQUEST:
+      startChairCalibrationMiddlewareAction(next, action);
+      break
+    case GET_CALIBRATION_PROGRESS_REQUEST:
+      getCalibrationProgressMiddlewareAction(next, action);
+      break
     default:
       break
   }
 };
+
+function getCalibrationProgressMiddlewareAction(next, action) {
+  const error = (err) => {
+    next(setMessage([err.message], "error"));
+    next(getCalibrationProgressFailure(err.message));
+  };
+
+  const success = (response) => {
+    next(getCalibrationProgressSuccess(response));
+  };
+
+  getCalibrationProgressService(action.payload.chairId, success, error);
+};
+
+function startChairCalibrationMiddlewareAction(next, action) {
+  const error = (err) => {
+    let errors = ["Calibration could not be started"];
+    
+    let body = err.response.body;
+    let errorJson = {};
+    if(body != undefined) {
+      errorJson = body.errors
+    }
+    errors = errors.concat(processErrorMessages(errorJson));
+
+    next(setMessage(errors, "error"));
+    next(startChairCalibrationFailure(err.message));
+  };
+
+  const success = (response) => {
+    next(setMessage(["Calibration created successfully"], "success")); // not gonna show because of route change ??? how to fix ???
+    next(startChairCalibrationSuccess(response.chair));
+    // history = createHistory();
+    // history.push('/chairs');
+  };
+
+  startChairCalibrationService(action.payload.calibration, success, error);
+}
 
 function getChairDataMiddlewareAction(next, action) {
   const error = (err) => {
