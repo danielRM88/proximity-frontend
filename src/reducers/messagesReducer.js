@@ -5,7 +5,6 @@ const initialState = {
 };
 
 const messages = (state = initialState, action) => {
-  console.log(action.type);
   switch (action.type) {
     case SET_MESSAGE:
       return { ...state, ...action.payload }

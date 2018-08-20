@@ -4,24 +4,23 @@ import App from './components/App';
 import BeaconListContainer from './containers/beacons/BeaconListContainer';
 import BeaconNewContainer from './containers/beacons/BeaconNewContainer';
 import BeaconEditContainer from './containers/beacons/BeaconEditContainer';
+import BeaconPanelContainer from './containers/beacons/BeaconPanelContainer';
 import ChairNewContainer from './containers/chairs/ChairNewContainer';
 import ChairEditContainer from './containers/chairs/ChairEditContainer';
 import ChairListContainer from './containers/chairs/ChairListContainer';
-import { getBeaconsRequest, getBeaconRequest } from './actions/beaconsActions';
-import { getChairsRequest, getChairRequest } from './actions/chairsActions';
+import ChairPanel from './components/chairs/ChairPanel';
+import FilterPanelContainer from './containers/chairs/FilterPanelContainer';
+import ChairPanelContainer from './containers/chairs/ChairPanelContainer';
+import { getBeaconsRequest, getBeaconRequest, getBeaconDataRequest, getBeaconDataFromChairRequest } from './actions/beaconsActions';
+import { getChairsRequest, getChairRequest, getChairDataRequest } from './actions/chairsActions';
 
 import createHistory from "history/createBrowserHistory";
 import store from "./store/store";
 import { removeMessage } from "./actions/messagesActions";
 
-const history = createHistory()
-
-// Get the current location.
-const location = history.location
-// Listen for changes to the current location.
+const history = createHistory();
+const location = history.location;
 const unlisten = history.listen((location, action) => {
-  // location is an object like window.location
-  console.log(action, location.pathname, location.state);
   store.dispatch(removeMessage());
 })
 
@@ -46,6 +45,12 @@ export default () => {
         <Route exact path='/chairs/:id/edit' render={ (props) => {
               store.dispatch(getChairRequest(props.match.params.id));
               return <ChairEditContainer />
+        }}/>
+        <Route exact path='/chairs/:id/panel' render={ (props) => {
+              store.dispatch(getChairRequest(props.match.params.id));
+              store.dispatch(getChairDataRequest(props.match.params.id, 200));
+              store.dispatch(getBeaconDataFromChairRequest(props.match.params.id, 200));
+              return <ChairPanelContainer chairId={props.match.params.id} />
         }}/>
         <Route exact path='/chairs' render={ () => {
               store.dispatch(getChairsRequest());

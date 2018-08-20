@@ -3,17 +3,31 @@ import { CREATE_CHAIR_REQUEST, CREATE_CHAIR_SUCCESS, CREATE_CHAIR_FAILURE } from
 import { DELETE_CHAIR_REQUEST, DELETE_CHAIR_SUCCESS, DELETE_CHAIR_FAILURE } from "../actions/chairsActions"
 import { GET_CHAIR_REQUEST, GET_CHAIR_SUCCESS, GET_CHAIR_FAILURE } from "../actions/chairsActions"
 import { UPDATE_CHAIR_REQUEST, UPDATE_CHAIR_SUCCESS, UPDATE_CHAIR_FAILURE } from "../actions/chairsActions"
+import { GET_CHAIR_DATA_REQUEST, GET_CHAIR_DATA_SUCCESS, GET_CHAIR_DATA_FAILURE, REFRESH_CHAIR_DATA_REQUEST } from "../actions/chairsActions"
 
 const initialState = {
   index: {chairs: [], loading: false, error: undefined},
-  new: {chairs: {}, loading: false, error: undefined},
-  edit: {chairs: {}, loading: false, error: undefined},
-  panel: {chairs: [], loading: false, error: undefined}
+  new: {chair: {}, loading: false, error: undefined},
+  edit: {chair: {}, loading: false, error: undefined},
+  panel: {predictions: [], loading: false, error: undefined}
 };
 
 const chairs = (state = initialState, action) => {
-  console.log(action.type);
   switch (action.type) {
+    case REFRESH_CHAIR_DATA_REQUEST:
+      return state
+    case GET_CHAIR_DATA_REQUEST:
+      return Object.assign({}, state, {
+        panel: {...state.index, ...action.payload, predictions: []}
+      });
+    case GET_CHAIR_DATA_SUCCESS:
+      return Object.assign({}, state, {
+        panel: {...state.index, ...action.payload}
+      });
+    case GET_CHAIR_DATA_FAILURE:
+      return Object.assign({}, state, {
+        panel: {...state.index, ...action.payload}
+      });
     case GET_CHAIRS_REQUEST:
       return Object.assign({}, state, {
         index: {...state.index, chairs: [], ...action.payload}

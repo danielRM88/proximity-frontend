@@ -13,10 +13,10 @@ class BeaconList extends Component {
             <table className="table table-striped table-hover">
               <thead>
                 <tr>
-                  <th>Chair</th>
-                  <th className="left-separator">Mac Address</th>
+                  <th>Mac Address</th>
                   <th className="left-separator">Brand</th>
                   <th className="left-separator">Model</th>
+                  <th className="left-separator">Chair</th>
                   <th className="left-separator">Active</th>
                   <th className="left-separator"></th>
                   <th></th>
@@ -26,10 +26,10 @@ class BeaconList extends Component {
                 { beacons.map((beacon, i) => {
                   return(
                     <tr key={i}>
-                      <td>{beacon.chair_name}</td>
                       <td>{beacon.mac_address}</td>
                       <td>{beacon.brand}</td>
                       <td>{beacon.model}</td>
+                      <td>{beacon.chair_name}</td>
                       <td>{beacon.active}</td>
                       <td><Link to={`/beacons/${beacon.id}/edit`} className="btn btn-sm btn-primary"> Edit </Link></td>
                       <td><button onClick={(event) => this.handleClick(event, beacon.id)} className="btn btn-sm btn-danger"> Delete </button></td>

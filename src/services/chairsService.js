@@ -1,5 +1,20 @@
 import request from 'superagent';
 
+export function getChairDataService(chairId, limit, success, error) {
+  request
+    .get('http://localhost:3000/chairs/'+chairId+'/predictions')
+    .set('Content-Type', 'application/json')
+    .query({ limit: limit })
+    .end((err, res) => {
+      if (err) {
+        error(err);
+      } else {
+        const response = JSON.parse(res.text);
+        success(response);
+      }
+    })
+};
+
 export function createChairService(chair, success, error) {
   request
     .post('http://localhost:3000/chairs')

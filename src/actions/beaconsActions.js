@@ -1,3 +1,64 @@
+export const REFRESH_BEACON_DATA_REQUEST = 'REFRESH_BEACON_DATA_REQUEST'
+
+export function refreshBeaconDataRequest(beacons, limit) {
+  return {
+    type: REFRESH_BEACON_DATA_REQUEST,
+    payload: {
+      beacons,
+      limit
+    }
+  }
+}
+
+
+export const GET_BEACON_DATA_FROM_CHAIR_REQUEST = 'GET_BEACON_DATA_FROM_CHAIR_REQUEST'
+export const GET_BEACON_DATA_REQUEST = 'GET_BEACON_DATA_REQUEST'
+export const GET_BEACON_DATA_SUCCESS = 'GET_BEACON_DATA_SUCCESS'
+export const GET_BEACON_DATA_FAILURE = 'GET_BEACON_DATA_FAILURE'
+
+export function getBeaconDataFromChairRequest(chairId, limit) {
+  return {
+    type: GET_BEACON_DATA_FROM_CHAIR_REQUEST,
+    payload: {
+      chairId,
+      limit,
+      loading: true
+    }
+  }
+}
+
+export function getBeaconDataRequest(beacons, limit) {
+  return {
+    type: GET_BEACON_DATA_REQUEST,
+    payload: {
+      beacons,
+      limit,
+      loading: true
+    }
+  }
+}
+
+export function getBeaconDataSuccess(beacons) {
+  return {
+    type: GET_BEACON_DATA_SUCCESS,
+    payload: {
+      beacons,
+      loading: false
+    }
+  }
+}
+
+export function getBeaconDataFailure(message) {
+  return {
+    type: GET_BEACON_DATA_FAILURE,
+    payload: {
+      loading: false,
+      message
+    }
+  }
+}
+
+
 export const CREATE_BEACON_REQUEST = 'CREATE_BEACON_REQUEST'
 export const CREATE_BEACON_SUCCESS = 'CREATE_BEACON_SUCCESS'
 export const CREATE_BEACON_FAILURE = 'CREATE_BEACON_FAILURE'

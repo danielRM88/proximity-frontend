@@ -1,4 +1,4 @@
-import { createBeaconService, getBeaconService, getBeaconsService, updateBeaconService, deleteBeaconService } from '../services/beaconsService'
+import { createBeaconService, getBeaconService, getBeaconsService, updateBeaconService, deleteBeaconService, getBeaconDataService, getBeaconDataFromChairService } from '../services/beaconsService'
 import { getBeaconsRequest,
          getBeaconsSuccess,
          getBeaconsFailure,
@@ -13,9 +13,20 @@ import { getBeaconsRequest,
          updateBeaconFailure,
          deleteBeaconRequest,
          deleteBeaconSuccess,
-         deleteBeaconFailure
+         deleteBeaconFailure,
+         getBeaconDataRequest,
+         getBeaconDataFromChairRequest,
+         getBeaconDataSuccess,
+         getBeaconDataFailure
        } from '../actions/beaconsActions';
-import { GET_BEACONS_REQUEST, GET_BEACON_REQUEST, CREATE_BEACON_REQUEST, UPDATE_BEACON_REQUEST, DELETE_BEACON_REQUEST } from '../actions/beaconsActions';
+import { GET_BEACONS_REQUEST, 
+         GET_BEACON_REQUEST, 
+         CREATE_BEACON_REQUEST, 
+         UPDATE_BEACON_REQUEST, 
+         DELETE_BEACON_REQUEST, 
+         GET_BEACON_DATA_REQUEST,
+         GET_BEACON_DATA_FROM_CHAIR_REQUEST, 
+         REFRESH_BEACON_DATA_REQUEST } from '../actions/beaconsActions';
 import { setMessage, removeMessage } from '../actions/messagesActions';
 import { browserHistory, hashHistory } from 'react-router-dom';
 import store from "../store/store";
@@ -39,8 +50,34 @@ const beaconsMiddleware = store => next => action => {
     case DELETE_BEACON_REQUEST:
       deleteBeaconMiddlewareAction(next, action);
       break
+    case GET_BEACON_DATA_REQUEST:
+      getBeaconDataMiddlewareAction(next, action);
+      break
+    case REFRESH_BEACON_DATA_REQUEST:
+      getBeaconDataMiddlewareAction(next, action);
+      break
+    case GET_BEACON_DATA_FROM_CHAIR_REQUEST:
+      getBeaconDataMiddlewareAction(next, action);
+      break
     default:
       break
+  }
+};
+
+function getBeaconDataMiddlewareAction(next, action) {
+  const error = (err) => {
+    next(setMessage([err.message], "error"));
+    next(getBeaconDataFailure(err.message));
+  };
+
+  const success = (response) => {
+    next(getBeaconDataSuccess(response.beacons));
+  };
+
+  if (action.type === GET_BEACON_DATA_FROM_CHAIR_REQUEST) {
+    getBeaconDataFromChairService(action.payload.chairId, action.payload.limit, success, error);
+  } else {
+    getBeaconDataService(action.payload.beacons, action.payload.limit, success, error);
   }
 };
 

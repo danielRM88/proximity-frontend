@@ -1,5 +1,35 @@
 import request from 'superagent';
 
+export function getBeaconDataFromChairService(chairId, limit, success, error) {
+  request
+    .get('http://localhost:3000/beacons/fetch_data')
+    .set('Content-Type', 'application/json')
+    .query({ chair_id: chairId, limit: limit })
+    .end((err, res) => {
+      if (err) {
+        error(err);
+      } else {
+        const response = JSON.parse(res.text);
+        success(response);
+      }
+    })
+};
+
+export function getBeaconDataService(beacons, limit, success, error) {
+  request
+    .get('http://localhost:3000/beacons/fetch_data')
+    .set('Content-Type', 'application/json')
+    .query({ beacons_ids: `[${beacons}]`, limit: limit })
+    .end((err, res) => {
+      if (err) {
+        error(err);
+      } else {
+        const response = JSON.parse(res.text);
+        success(response);
+      }
+    })
+};
+
 export function createBeaconService(beacon, success, error) {
   request
     .post('http://localhost:3000/beacons')

@@ -1,4 +1,4 @@
-import { createChairService, getChairService, getChairsService, updateChairService, deleteChairService } from '../services/chairsService'
+import { createChairService, getChairService, getChairsService, updateChairService, deleteChairService, getChairDataService } from '../services/chairsService'
 import { getChairsRequest,
          getChairsSuccess,
          getChairsFailure,
@@ -13,9 +13,18 @@ import { getChairsRequest,
          updateChairFailure,
          deleteChairRequest,
          deleteChairSuccess,
-         deleteChairFailure
+         deleteChairFailure,
+         getChairDataRequest,
+         getChairDataSuccess,
+         getChairDataFailure
        } from '../actions/chairsActions';
-import { GET_CHAIRS_REQUEST, GET_CHAIR_REQUEST, CREATE_CHAIR_REQUEST, UPDATE_CHAIR_REQUEST, DELETE_CHAIR_REQUEST } from '../actions/chairsActions';
+import { GET_CHAIRS_REQUEST, 
+         GET_CHAIR_REQUEST, 
+         CREATE_CHAIR_REQUEST, 
+         UPDATE_CHAIR_REQUEST, 
+         DELETE_CHAIR_REQUEST,
+         GET_CHAIR_DATA_REQUEST, 
+         REFRESH_CHAIR_DATA_REQUEST } from '../actions/chairsActions';
 import { setMessage, removeMessage } from '../actions/messagesActions';
 import { browserHistory, hashHistory } from 'react-router-dom';
 import { processErrorMessages } from '../utility/util';
@@ -39,9 +48,28 @@ const chairsMiddleware = store => next => action => {
     case UPDATE_CHAIR_REQUEST:
       updateChairMiddlewareAction(next, action);
       break
+    case GET_CHAIR_DATA_REQUEST:
+      getChairDataMiddlewareAction(next, action);
+      break
+    case REFRESH_CHAIR_DATA_REQUEST:
+      getChairDataMiddlewareAction(next, action);
+      break
     default:
       break
   }
+};
+
+function getChairDataMiddlewareAction(next, action) {
+  const error = (err) => {
+    next(setMessage([err.message], "error"));
+    next(getChairDataFailure(err.message));
+  };
+
+  const success = (response) => {
+    next(getChairDataSuccess(response.predictions));
+  };
+
+  getChairDataService(action.payload.chairId, action.payload.limit, success, error);
 };
 
 function createChairMiddlewareAction(next, action) {

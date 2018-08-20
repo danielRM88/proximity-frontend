@@ -1,3 +1,52 @@
+export const REFRESH_CHAIR_DATA_REQUEST = 'REFRESH_CHAIR_DATA_REQUEST'
+
+export function refreshChairDataRequest(chairId, limit) {
+  return {
+    type: REFRESH_CHAIR_DATA_REQUEST,
+    payload: {
+      chairId,
+      limit
+    }
+  }
+}
+
+
+export const GET_CHAIR_DATA_REQUEST = 'GET_CHAIR_DATA_REQUEST'
+export const GET_CHAIR_DATA_SUCCESS = 'GET_CHAIR_DATA_SUCCESS'
+export const GET_CHAIR_DATA_FAILURE = 'GET_CHAIR_DATA_FAILURE'
+
+export function getChairDataRequest(chairId, limit) {
+  return {
+    type: GET_CHAIR_DATA_REQUEST,
+    payload: {
+      chairId,
+      limit,
+      loading: true
+    }
+  }
+}
+
+export function getChairDataSuccess(predictions) {
+  return {
+    type: GET_CHAIR_DATA_SUCCESS,
+    payload: {
+      predictions,
+      loading: false
+    }
+  }
+}
+
+export function getChairDataFailure(message) {
+  return {
+    type: GET_CHAIR_DATA_FAILURE,
+    payload: {
+      loading: false,
+      message
+    }
+  }
+}
+
+
 export const CREATE_CHAIR_REQUEST = 'CREATE_CHAIR_REQUEST'
 export const CREATE_CHAIR_SUCCESS = 'CREATE_CHAIR_SUCCESS'
 export const CREATE_CHAIR_FAILURE = 'CREATE_CHAIR_FAILURE'
