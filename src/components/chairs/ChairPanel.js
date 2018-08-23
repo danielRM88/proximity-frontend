@@ -8,7 +8,7 @@ import Loading from '../Loading';
 
 class ChairPanel extends Component {
   render() {
-    const { chairId, chairName, beaconsIds, hasFilter, calibrated, loading, seated, updateFilter, processNoise } = this.props;
+    const { chairId, chairName, beaconsIds, hasFilter, calibrated, loading, seated, updateFilter, processNoise, continuousAdjustment, adjustmentThreshold } = this.props;
     if(!loading) {
       if(calibrated) {
         return (
@@ -22,6 +22,8 @@ class ChairPanel extends Component {
                 {hasFilter &&
                     <ChairFilterForm  chairId={chairId}
                                     processNoise={processNoise}
+                                    continuousAdjustment={continuousAdjustment}
+                                    adjustmentThreshold={adjustmentThreshold}
                                     onActionClick={updateFilter}/>
                 }
               </div>
@@ -58,7 +60,7 @@ class ChairPanel extends Component {
               <h1>Chair {chairName} not calibrated!</h1>
             </header>
             <div className="text-center">
-              <Link to={`/calibration/${chairId}`} className="btn btn-success"> Start Calibration </Link>
+              <Link to={`/chairs/${chairId}/edit`} className="btn btn-success"> Start Calibration </Link>
               &nbsp;
               <Link to="/chairs" className="btn btn-primary"> Back </Link>
             </div>
@@ -66,7 +68,16 @@ class ChairPanel extends Component {
         );
       }
     } else {
-      return(<Loading />);
+      return(
+        <div className="panel">
+          <header>
+            <h1>Chair {chairName}</h1>
+          </header>
+          <div className="row">
+            <Loading />
+          </div>
+        </div>
+      );
     }
   }
 }

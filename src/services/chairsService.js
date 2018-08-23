@@ -1,10 +1,10 @@
 import request from 'superagent';
 
-export function updateFilterProcessErrorService(chairId, processError, success, error) {
+export function updateFilterProcessErrorService(data, success, error) {
   request
-    .put('http://localhost:3000/chairs/'+chairId+'/update_filter_process_noise')
+    .put('http://localhost:3000/chairs/'+data.chairId+'/update_filter_process_noise')
     .set('Content-Type', 'application/json')
-    .send({ process_error: processError })
+    .send({ process_error: data.processNoise, continuous_adjustment: data.continuousAdjustment, adjustment_threshold: data.adjustmentThreshold })
     .end((err, res) => {
       if (err) {
         error(err);

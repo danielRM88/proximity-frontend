@@ -13,6 +13,7 @@ const initialState = {
 };
 
 const beacons = (state = initialState, action) => {
+  // console.log(action);
   switch (action.type) {
     case REFRESH_BEACON_DATA_REQUEST:
       return state

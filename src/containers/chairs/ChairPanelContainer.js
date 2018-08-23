@@ -13,6 +13,8 @@ const mapStateToProps = (state) => {
   let calibrated;
   let seated = false;
   let processNoise;
+  let continuousAdjustment;
+  let adjustmentThreshold;
 
   if (chair !== undefined) {
     chairId = chair.id;
@@ -29,7 +31,9 @@ const mapStateToProps = (state) => {
     calibrated = chair.calibrated;
 
     if(hasFilter) {
-      processNoise = chair.filter.V1[0][0]
+      processNoise = chair.filter.V1[0][0];
+      continuousAdjustment = chair.filter.continuous_adjustment;
+      adjustmentThreshold = chair.filter.adjustment_threshold;
     }
   }
 
@@ -41,6 +45,8 @@ const mapStateToProps = (state) => {
     calibrated,
     seated,
     processNoise,
+    continuousAdjustment,
+    adjustmentThreshold,
     loading
   })
 };
@@ -51,8 +57,8 @@ const mapDispatchToProps = (dispatch) => ({
       dispatch(refreshChairDataRequest(chairId, 200));
     }
   },
-  updateFilter: (chairId, processNoise) => {
-    dispatch(updateFilterProcessErrorRequest(chairId, processNoise));
+  updateFilter: (data, processNoise) => {
+    dispatch(updateFilterProcessErrorRequest(data, processNoise));
   }
 });
 

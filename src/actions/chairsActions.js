@@ -2,12 +2,12 @@ export const UPDATE_FILTER_PROCESS_ERROR_REQUEST = 'UPDATE_FILTER_PROCESS_ERROR_
 export const UPDATE_FILTER_PROCESS_ERROR_SUCCESS = 'UPDATE_FILTER_PROCESS_ERROR_SUCCESS'
 export const UPDATE_FILTER_PROCESS_ERROR_FAILURE = 'UPDATE_FILTER_PROCESS_ERROR_FAILURE'
 
-export function updateFilterProcessErrorRequest(chairId, processError) {
+export function updateFilterProcessErrorRequest(data, processError) {
   return {
     type: UPDATE_FILTER_PROCESS_ERROR_REQUEST,
     payload: {
       loading: true,
-      chairId,
+      data,
       processError
     }
   }

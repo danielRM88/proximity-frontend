@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
+import Loading from '../Loading';
 
 class ChairList extends Component {
   render() {
@@ -16,6 +17,7 @@ class ChairList extends Component {
                   <th>Name</th>
                   <th className="left-separator">Notes</th>
                   <th className="left-separator">Has Filter</th>
+                  <th className="left-separator">Calibrated</th>
                   <th className="left-separator"></th>
                   <th></th>
                   <th></th>
@@ -28,6 +30,7 @@ class ChairList extends Component {
                       <td>{chair.name}</td>
                       <td>{chair.notes}</td>
                       <td>{`${chair.has_filter}`}</td>
+                      <td>{chair.calibration.ongoing? ('Ongoing') : (`${chair.calibrated}`)}</td>
                       <td><Link to={`/chairs/${chair.id}/panel`} className="btn btn-sm btn-info"> Panel </Link></td>
                       <td><Link to={`/chairs/${chair.id}/edit`} className="btn btn-sm btn-primary"> Edit </Link></td>
                       <td><button onClick={(event) => this.handleClick(event, chair.id)} className="btn btn-sm btn-danger"> Delete </button></td>
@@ -58,7 +61,7 @@ class ChairList extends Component {
       return (
         <div>
           <h1>Chairs</h1>
-          <p>Loading...</p>
+          <Loading />
         </div>
       )
     }

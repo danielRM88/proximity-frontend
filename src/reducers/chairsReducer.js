@@ -16,9 +16,9 @@ const initialState = {
 };
 
 const chairs = (state = initialState, action) => {
+  // console.log(action);
   switch (action.type) {
     case UPDATE_FILTER_PROCESS_ERROR_REQUEST:
-      console.log(action);
       return state;
     case UPDATE_FILTER_PROCESS_ERROR_SUCCESS:
       return Object.assign({}, state, {
@@ -37,7 +37,8 @@ const chairs = (state = initialState, action) => {
                   chair: { ...state.edit.chair, 
                               calibration: {...state.edit.chair.calibration, 
                                 ongoing: action.payload.ongoing,
-                                progress: action.payload.progress
+                                progress: action.payload.progress,
+                                calibrated: action.payload.calibrated
                               } 
                   }
               }

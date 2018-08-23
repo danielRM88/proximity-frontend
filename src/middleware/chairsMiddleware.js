@@ -103,7 +103,7 @@ function updateFilterProcessErrorMiddlewareAction(next, action) {
     // }
   };
 
-  updateFilterProcessErrorService(action.payload.chairId, action.payload.processError, success, error);
+  updateFilterProcessErrorService(action.payload.data, success, error);
 };
 
 function getCalibrationProgressMiddlewareAction(next, action) {

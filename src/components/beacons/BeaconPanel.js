@@ -61,7 +61,16 @@ class BeaconPanel extends Component {
       }
     } else {
       return (
-        <Loading />
+        <div className="beacon-panel">
+          <div className="row">
+            <div className="col-sm-12">
+              <h5>Beacons</h5>
+            </div>
+          </div>
+          <div className="row">
+            <Loading />
+          </div>
+        </div>
       );
     }
   }

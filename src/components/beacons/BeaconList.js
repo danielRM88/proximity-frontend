@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
+import Loading from '../Loading';
 
 class BeaconList extends Component {
   render() {
@@ -60,7 +61,7 @@ class BeaconList extends Component {
       return (
         <div>
           <h1>Beacons</h1>
-          <p>Loading...</p>
+          <Loading />
         </div>
       )
     }

@@ -12,7 +12,7 @@ class Seated extends Component {
     return (
       <div className="containerl">
         <header>
-          <h5>Seated</h5>
+          <h5>Is Someone Seated?</h5>
         </header>
         <div className={`alert alert-${alertType}`} role="alert" style={{height: '200px'}}>
           {`${answer}`}
