@@ -1,6 +1,6 @@
 import ChairPanel from '../../components/chairs/ChairPanel'
 import { connect } from 'react-redux';
-import { refreshChairDataRequest, updateFilterProcessErrorRequest } from '../../actions/chairsActions';
+import { refreshChairDataRequest, updateFilterProcessErrorRequest, updateGroundTruthRequest } from '../../actions/chairsActions';
 
 const mapStateToProps = (state) => {
   const editState = state.chairs.edit;
@@ -15,6 +15,11 @@ const mapStateToProps = (state) => {
   let continuousAdjustment;
   let adjustmentThreshold;
   const seated = state.chairs.panel.seated;
+  let active;
+  let gtSeated = false;
+  let gtGender = undefined;
+  let gtHeight = 0.0;
+  let gtWeight = 0.0;
 
   if (chair !== undefined) {
     chairId = chair.id;
@@ -35,6 +40,15 @@ const mapStateToProps = (state) => {
       continuousAdjustment = chair.filter.continuous_adjustment;
       adjustmentThreshold = chair.filter.adjustment_threshold;
     }
+
+    const groundTruth = chair.ground_truth;
+    if (groundTruth !== undefined) {
+      active = groundTruth.active;
+      gtSeated = groundTruth.seated;
+      gtGender = groundTruth.gender;
+      gtHeight = groundTruth.height;
+      gtWeight = groundTruth.weight;
+    }
   }
 
   return ({
@@ -47,6 +61,11 @@ const mapStateToProps = (state) => {
     processNoise,
     continuousAdjustment,
     adjustmentThreshold,
+    active,
+    gtSeated,
+    gtGender,
+    gtHeight,
+    gtWeight,
     loading
   })
 };
@@ -59,6 +78,9 @@ const mapDispatchToProps = (dispatch) => ({
   },
   updateFilter: (data, processNoise) => {
     dispatch(updateFilterProcessErrorRequest(data, processNoise));
+  },
+  onClickAction: (groundTruth) => {
+    dispatch(updateGroundTruthRequest(groundTruth));
   }
 });
 

@@ -1,4 +1,6 @@
-import { createChairService, getChairService, getChairsService, updateChairService, deleteChairService, getChairDataService, startChairCalibrationService, getCalibrationProgressService, updateFilterProcessErrorService } from '../services/chairsService'
+import { createChairService, getChairService, getChairsService, updateChairService, 
+         deleteChairService, getChairDataService, startChairCalibrationService, 
+         getCalibrationProgressService, updateFilterProcessErrorService, updateGroundTruthService } from '../services/chairsService'
 import { getChairsRequest,
          getChairsSuccess,
          getChairsFailure,
@@ -25,7 +27,9 @@ import { getChairsRequest,
          getCalibrationProgressFailure,
          updateFilterProcessErrorRequest,
          updateFilterProcessErrorSuccess,
-         updateFilterProcessErrorFailure
+         updateFilterProcessErrorFailure,
+         updateGroundTruthSuccess,
+         updateGroundTruthFailure
        } from '../actions/chairsActions';
 import { GET_CHAIRS_REQUEST, 
          GET_CHAIR_REQUEST, 
@@ -36,7 +40,8 @@ import { GET_CHAIRS_REQUEST,
          REFRESH_CHAIR_DATA_REQUEST,
          START_CHAIR_CALIBRATION_REQUEST,
          GET_CALIBRATION_PROGRESS_REQUEST,
-         UPDATE_FILTER_PROCESS_ERROR_REQUEST } from '../actions/chairsActions';
+         UPDATE_FILTER_PROCESS_ERROR_REQUEST,
+         UPDATE_GROUND_TRUTH_REQUEST } from '../actions/chairsActions';
 import { setMessage, removeMessage } from '../actions/messagesActions';
 import { browserHistory, hashHistory } from 'react-router-dom';
 import { processErrorMessages } from '../utility/util';
@@ -75,9 +80,38 @@ const chairsMiddleware = store => next => action => {
     case UPDATE_FILTER_PROCESS_ERROR_REQUEST:
       updateFilterProcessErrorMiddlewareAction(next, action);
       break
+    case UPDATE_GROUND_TRUTH_REQUEST:
+      updateGroundTruthMiddlewareAction(next, action);
+      break
     default:
       break
   }
+};
+
+function updateGroundTruthMiddlewareAction(next, action) {
+  const error = (err) => {
+    let errors = ["The ground truth could not be updated"];
+    
+    let body = err.response.body;
+    let errorJson = {};
+    if(body != undefined) {
+      errorJson = body.errors
+    }
+    errors = errors.concat(processErrorMessages(errorJson));
+
+    next(setMessage(errors, "error"));
+    next(updateGroundTruthFailure(err.message));
+  };
+
+  const success = () => {
+    next(setMessage(["Ground truth updated successfully"], "success")); // not gonna show because of route change ??? how to fix ???
+    next(updateGroundTruthSuccess());
+    // if (action.redirect) {
+    //   hashHistory.push('/chairs/'+action.payload.chair.id;
+    // }
+  };
+
+  updateGroundTruthService(action.payload.groundTruth, success, error);
 };
 
 function updateFilterProcessErrorMiddlewareAction(next, action) {

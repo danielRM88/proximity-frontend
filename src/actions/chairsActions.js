@@ -1,3 +1,37 @@
+export const UPDATE_GROUND_TRUTH_REQUEST = 'UPDATE_GROUND_TRUTH_REQUEST'
+export const UPDATE_GROUND_TRUTH_SUCCESS = 'UPDATE_GROUND_TRUTH_SUCCESS'
+export const UPDATE_GROUND_TRUTH_FAILURE = 'UPDATE_GROUND_TRUTH_FAILURE'
+
+export function updateGroundTruthRequest(groundTruth) {
+  return {
+    type: UPDATE_GROUND_TRUTH_REQUEST,
+    payload: {
+      loading: true,
+      groundTruth
+    }
+  }
+}
+
+export function updateGroundTruthSuccess() {
+  return {
+    type: UPDATE_GROUND_TRUTH_SUCCESS,
+    payload: {
+      loading: false
+    }
+  }
+}
+
+export function updateGroundTruthFailure(message) {
+  return {
+    type: UPDATE_GROUND_TRUTH_FAILURE,
+    payload: {
+      loading: false,
+      message
+    }
+  }
+}
+
+
 export const UPDATE_FILTER_PROCESS_ERROR_REQUEST = 'UPDATE_FILTER_PROCESS_ERROR_REQUEST'
 export const UPDATE_FILTER_PROCESS_ERROR_SUCCESS = 'UPDATE_FILTER_PROCESS_ERROR_SUCCESS'
 export const UPDATE_FILTER_PROCESS_ERROR_FAILURE = 'UPDATE_FILTER_PROCESS_ERROR_FAILURE'

@@ -1,5 +1,20 @@
 import request from 'superagent';
 
+export function updateGroundTruthService(groundTruth, success, error) {
+  request
+    .put('http://localhost:3000/chairs/'+groundTruth.chairId+'/ground_truth')
+    .set('Content-Type', 'application/json')
+    .send({ ground_truth: groundTruth })
+    .end((err, res) => {
+      if (err) {
+        error(err);
+      } else {
+        const response = JSON.parse(res.text);
+        success(response);
+      }
+    })
+};
+
 export function updateFilterProcessErrorService(data, success, error) {
   request
     .put('http://localhost:3000/chairs/'+data.chairId+'/update_filter_process_noise')

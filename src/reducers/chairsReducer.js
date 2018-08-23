@@ -7,6 +7,7 @@ import { GET_CHAIR_DATA_REQUEST, GET_CHAIR_DATA_SUCCESS, GET_CHAIR_DATA_FAILURE,
 import { START_CHAIR_CALIBRATION_REQUEST, START_CHAIR_CALIBRATION_SUCCESS, START_CHAIR_CALIBRATION_FAILURE } from "../actions/chairsActions"
 import { GET_CALIBRATION_PROGRESS_REQUEST, GET_CALIBRATION_PROGRESS_SUCCESS, GET_CALIBRATION_PROGRESS_FAILURE } from "../actions/chairsActions"
 import { UPDATE_FILTER_PROCESS_ERROR_REQUEST, UPDATE_FILTER_PROCESS_ERROR_SUCCESS, UPDATE_FILTER_PROCESS_ERROR_FAILURE } from "../actions/chairsActions"
+import { UPDATE_GROUND_TRUTH_REQUEST, UPDATE_GROUND_TRUTH_SUCCESS, UPDATE_GROUND_TRUTH_FAILURE } from "../actions/chairsActions"
 
 const initialState = {
   index: {chairs: [], loading: false, error: undefined},
@@ -18,6 +19,16 @@ const initialState = {
 const chairs = (state = initialState, action) => {
   // console.log(action);
   switch (action.type) {
+    case UPDATE_GROUND_TRUTH_REQUEST:
+      return state;
+    case UPDATE_GROUND_TRUTH_SUCCESS:
+      return Object.assign({}, state, {
+        edit: {...state.edit, ...action.payload}
+      });
+    case UPDATE_GROUND_TRUTH_FAILURE:
+      return Object.assign({}, state, {
+        edit: {...state.edit, ...action.payload}
+      });
     case UPDATE_FILTER_PROCESS_ERROR_REQUEST:
       return state;
     case UPDATE_FILTER_PROCESS_ERROR_SUCCESS:
