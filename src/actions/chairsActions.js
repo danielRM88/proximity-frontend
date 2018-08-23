@@ -133,11 +133,12 @@ export function getChairDataRequest(chairId, limit) {
   }
 }
 
-export function getChairDataSuccess(predictions) {
+export function getChairDataSuccess(predictions, seated) {
   return {
     type: GET_CHAIR_DATA_SUCCESS,
     payload: {
       predictions,
+      seated,
       loading: false
     }
   }

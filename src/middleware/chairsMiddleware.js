@@ -135,7 +135,7 @@ function startChairCalibrationMiddlewareAction(next, action) {
   };
 
   const success = (response) => {
-    next(setMessage(["Calibration created successfully"], "success")); // not gonna show because of route change ??? how to fix ???
+    next(setMessage(["Calibration started successfully"], "success")); // not gonna show because of route change ??? how to fix ???
     next(startChairCalibrationSuccess(response.chair));
     // history = createHistory();
     // history.push('/chairs');
@@ -151,7 +151,7 @@ function getChairDataMiddlewareAction(next, action) {
   };
 
   const success = (response) => {
-    next(getChairDataSuccess(response.predictions));
+    next(getChairDataSuccess(response.predictions, response.seated));
   };
 
   getChairDataService(action.payload.chairId, action.payload.limit, success, error);

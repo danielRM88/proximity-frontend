@@ -7,6 +7,7 @@ import Routes from "./routes";
 // ########### FOR DEBUGGING PURPOSES ##################
 import { getBeaconsRequest, getBeaconsSuccess, getBeaconsFailure, createBeaconRequest, createBeaconSuccess, createBeaconsFailure } from "./actions/beaconsActions";
 import { setMessage, removeMessage } from "./actions/messagesActions";
+import { getKMeansDataRequest } from "./actions/algorithmsActions";
 
 import { getChairsRequest, getChairsSuccess, getChairsFailure } from "./actions/chairsActions";
 
@@ -18,6 +19,8 @@ window.getBeaconsFailure = getBeaconsFailure;
 window.getChairsRequest = getChairsRequest;
 window.getChairsSuccess = getChairsSuccess;
 window.getChairsFailure = getChairsFailure;
+
+window.getKMeansDataRequest = getKMeansDataRequest;
 
 window.setMessage = setMessage;
 window.removeMessage = removeMessage;

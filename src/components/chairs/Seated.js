@@ -14,7 +14,7 @@ class Seated extends Component {
         <header>
           <h5>Is Someone Seated?</h5>
         </header>
-        <div className={`alert alert-${alertType}`} role="alert" style={{height: '200px'}}>
+        <div className={`alert alert-${alertType}`} role="alert" style={{height: '150px'}}>
           {`${answer}`}
         </div>
       </div>

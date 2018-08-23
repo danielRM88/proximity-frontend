@@ -11,10 +11,10 @@ const mapStateToProps = (state) => {
   let beaconsIds = [];
   let hasFilter;
   let calibrated;
-  let seated = false;
   let processNoise;
   let continuousAdjustment;
   let adjustmentThreshold;
+  const seated = state.chairs.panel.seated;
 
   if (chair !== undefined) {
     chairId = chair.id;

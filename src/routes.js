@@ -13,6 +13,7 @@ import FilterPanelContainer from './containers/chairs/FilterPanelContainer';
 import ChairPanelContainer from './containers/chairs/ChairPanelContainer';
 import { getBeaconsRequest, getBeaconRequest, getBeaconDataRequest, getBeaconDataFromChairRequest } from './actions/beaconsActions';
 import { getChairsRequest, getChairRequest, getChairDataRequest } from './actions/chairsActions';
+import { getKMeansDataRequest } from './actions/algorithmsActions';
 
 import createHistory from "history/createBrowserHistory";
 import store from "./store/store";
@@ -50,6 +51,7 @@ export default () => {
               store.dispatch(getChairRequest(props.match.params.id));
               store.dispatch(getChairDataRequest(props.match.params.id, 200));
               store.dispatch(getBeaconDataFromChairRequest(props.match.params.id, 200));
+              store.dispatch(getKMeansDataRequest(props.match.params.id, 200));
               return <ChairPanelContainer chairId={props.match.params.id} />
         }}/>
         <Route exact path='/chairs' render={ () => {
