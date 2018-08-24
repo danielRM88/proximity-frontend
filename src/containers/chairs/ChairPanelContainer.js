@@ -20,6 +20,14 @@ const mapStateToProps = (state) => {
   let gtGender = undefined;
   let gtHeight = 0.0;
   let gtWeight = 0.0;
+  let tn;
+  let fp;
+  let tp;
+  let fn;
+  let accuracy;
+  let precision;
+  let recall;
+  let specificity;
 
   if (chair !== undefined) {
     chairId = chair.id;
@@ -49,6 +57,18 @@ const mapStateToProps = (state) => {
       gtHeight = groundTruth.height;
       gtWeight = groundTruth.weight;
     }
+
+    const performance = state.chairs.panel.performance;
+    if (performance !== undefined) {
+      tn = performance.tn;
+      fp = performance.fp;
+      tp = performance.tp;
+      fn = performance.fn;
+      accuracy = performance.accuracy;
+      precision = performance.precision;
+      recall = performance.recall;
+      specificity = performance.specificity;
+    }
   }
 
   return ({
@@ -66,6 +86,14 @@ const mapStateToProps = (state) => {
     gtGender,
     gtHeight,
     gtWeight,
+    tn,
+    fp,
+    tp,
+    fn,
+    accuracy,
+    precision,
+    recall,
+    specificity,
     loading
   })
 };

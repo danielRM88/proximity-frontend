@@ -27,7 +27,7 @@ class GroundTruthForm extends Component {
   }
 
   render () {
-    let { chairId, active, seated, gender, height, weight } = this.props;
+    let { chairId, active, seated, gender, height, weight, tn, fp, tp, fn, accuracy, precision, recall, specificity } = this.props;
     let selectedOption;
     if (gender === 'male') {
       selectedOption = { value: 'male', label: 'Male' };
@@ -37,34 +37,54 @@ class GroundTruthForm extends Component {
     return (
       <form onSubmit={(event) => this.handleClick(event, chairId)}>
         <div className="row">
-          <div className="form-group col-sm-4">
-            <label htmlFor="active">Active</label><br/>
-            <input type="checkbox" name="active" defaultChecked={active} onChange={(event) => {this.handleActiveChange(event, this)}} />
+          <div className="col-sm-4">
+            <div className="form-group">
+              <label htmlFor="active">Recording</label><br/>
+              <input type="checkbox" name="active" defaultChecked={active} onChange={(event) => {this.handleActiveChange(event, this)}} />
+            </div>
+            <div className="form-group">
+              <label htmlFor="seated">Seated</label><br/>
+              <input type="checkbox" name="seated" defaultChecked={seated} onChange={(event) => {this.handleSeatedChange(event, this)}} />
+            </div>
           </div>
-          {/*<div className="col-sm-8">
+          <div className="col-sm-8">
             <table className="table-sm table-striped table-hover">
               <thead>
                 <tr>
+                  <th>TN</th>
                   <th>FP</th>
                   <th>TP</th>
-                  <th>NP</th>
-                  <th>TN</th>
+                  <th>FN</th>
                 </tr>
               </thead>
               <tbody>
                 <tr>
-                  <td>50%</td>
-                  <td>80%</td>
-                  <td>80%</td>
-                  <td>80%</td>
+                  <td>{tn}</td>
+                  <td>{fp}</td>
+                  <td>{tp}</td>
+                  <td>{fn}</td>
                 </tr>
               </tbody>
             </table>
-          </div>*/}
-        </div>
-        <div className="form-group">
-          <label htmlFor="seated">Seated</label>
-          <input type="checkbox" name="seated" className="form-control" defaultChecked={seated} onChange={(event) => {this.handleSeatedChange(event, this)}} />
+            <table className="table-sm table-striped table-hover">
+              <thead>
+                <tr>
+                  <th>P</th>
+                  <th>R</th>
+                  <th>A</th>
+                  <th>S</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>{precision}</td>
+                  <td>{recall}</td>
+                  <td>{accuracy}</td>
+                  <td>{specificity}</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
         </div>
         <div className="form-group">
           <label>Gender</label>

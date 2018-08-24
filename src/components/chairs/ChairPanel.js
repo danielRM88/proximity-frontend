@@ -11,12 +11,8 @@ import Loading from '../Loading';
 class ChairPanel extends Component {
   render() {
     const { chairId, chairName, beaconsIds, hasFilter, calibrated, loading, seated, updateFilter, processNoise, continuousAdjustment, adjustmentThreshold,
-            active,
-            gtSeated,
-            gtGender,
-            gtHeight,
-            gtWeight,
-            onClickAction } = this.props;
+            active, gtSeated, gtGender, gtHeight, gtWeight, onClickAction, 
+            tn, fp, tp, fn, accuracy, precision, recall, specificity } = this.props;
     if(!loading) {
       if(calibrated) {
         return (
@@ -50,6 +46,7 @@ class ChairPanel extends Component {
                                       gender={gtGender}
                                       height={gtHeight}
                                       weight={gtWeight}
+                                      tn={tn} fp={fp} tp={tp} fn={fn} accuracy={accuracy} precision={precision} recall={recall} specificity={specificity}
                                       onClickAction={onClickAction}/>
                     </div>
                     <div className="tab-pane fade" id="contact" role="tabpanel" aria-labelledby="contact-tab">
