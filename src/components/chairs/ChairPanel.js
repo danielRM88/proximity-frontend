@@ -2,8 +2,8 @@ import React, { Component } from 'react';
 import BeaconPanelContainer from '../../containers/beacons/BeaconPanelContainer';
 import FilterPanelContainer from '../../containers/chairs/FilterPanelContainer';
 import KMeansPanelContainer from '../../containers/algorithms/KMeansPanelContainer';
-import ChairFilterForm from '../../components/chairs/ChairFilterForm';
-import GroundTruthForm from '../../components/chairs/GroundTruthForm';
+import ChairFilterForm from './ChairFilterForm';
+import GroundTruthForm from './GroundTruthForm';
 import Seated from './Seated';
 import { Link } from 'react-router-dom';
 import Loading from '../Loading';
@@ -50,12 +50,21 @@ class ChairPanel extends Component {
                                       onClickAction={onClickAction}/>
                     </div>
                     <div className="tab-pane fade" id="contact" role="tabpanel" aria-labelledby="contact-tab">
-                      {hasFilter &&
-                          <ChairFilterForm  chairId={chairId}
+                      {hasFilter ?
+                          (<ChairFilterForm  chairId={chairId}
                                           processNoise={processNoise}
                                           continuousAdjustment={continuousAdjustment}
                                           adjustmentThreshold={adjustmentThreshold}
-                                          onActionClick={updateFilter}/>
+                                          onActionClick={updateFilter}/>):
+                          (
+                            <div className="beacon-panel">
+                              <div className="row">
+                                <div id="chartSection" className="col-sm-12">
+                                  No Filter found...
+                                </div>
+                              </div>
+                            </div>
+                          )
                       }
                     </div>
                   </div>
@@ -80,10 +89,10 @@ class ChairPanel extends Component {
                     </div>
                   )
                 }
+                <div className="text-center">
+                  <Link to="/chairs" className="btn btn-primary"> Back </Link>
+                </div>
               </div>
-            </div>
-            <div className="text-center">
-              <Link to="/chairs" className="btn btn-primary"> Back </Link>
             </div>
           </div>
         );

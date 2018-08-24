@@ -24,12 +24,14 @@ export function getKMeansDataRequest(chairId) {
   }
 }
 
-export function getKMeansDataSuccess(chairId, data) {
+export function getKMeansDataSuccess(chairId, data, seated, performance) {
   return {
     type: GET_KMEANS_DATA_SUCCESS,
     payload: {
       loading: false,
       data,
+      seated,
+      performance,
       chairId
     }
   }

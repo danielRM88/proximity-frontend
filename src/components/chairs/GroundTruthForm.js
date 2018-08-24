@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import Select from 'react-select';
+import ConfutionMatrixTable from './ConfutionMatrixTable'
 
 const options = [
   { value: 'male', label: 'Male' },
@@ -48,42 +49,14 @@ class GroundTruthForm extends Component {
             </div>
           </div>
           <div className="col-sm-8">
-            <table className="table-sm table-striped table-hover">
-              <thead>
-                <tr>
-                  <th>TN</th>
-                  <th>FP</th>
-                  <th>TP</th>
-                  <th>FN</th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr>
-                  <td>{tn}</td>
-                  <td>{fp}</td>
-                  <td>{tp}</td>
-                  <td>{fn}</td>
-                </tr>
-              </tbody>
-            </table>
-            <table className="table-sm table-striped table-hover">
-              <thead>
-                <tr>
-                  <th>P</th>
-                  <th>R</th>
-                  <th>A</th>
-                  <th>S</th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr>
-                  <td>{precision}</td>
-                  <td>{recall}</td>
-                  <td>{accuracy}</td>
-                  <td>{specificity}</td>
-                </tr>
-              </tbody>
-            </table>
+            <ConfutionMatrixTable tn={tn} 
+                                  fp={fp}
+                                  tp={tp}
+                                  fn={fn}
+                                  accuracy={accuracy}
+                                  precision={precision}
+                                  recall={recall}
+                                  specificity={specificity}/>
           </div>
         </div>
         <div className="form-group">

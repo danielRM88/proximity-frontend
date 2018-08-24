@@ -27,7 +27,7 @@ function getKMeansDataMiddlewareAction(next, action) {
   };
 
   const success = (response) => {
-    next(getKMeansDataSuccess(response.chair_id, response.data));
+    next(getKMeansDataSuccess(response.chair_id, response.data, response.seated, response.performance));
   };
 
   getKMeansDataService(action.payload.chairId, 20, success, error);

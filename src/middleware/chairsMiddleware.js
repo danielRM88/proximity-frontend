@@ -185,7 +185,7 @@ function getChairDataMiddlewareAction(next, action) {
   };
 
   const success = (response) => {
-    next(getChairDataSuccess(response.predictions, response.seated, response.performance));
+    next(getChairDataSuccess(response.predictions));
   };
 
   getChairDataService(action.payload.chairId, action.payload.limit, success, error);

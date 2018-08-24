@@ -14,7 +14,7 @@ const mapStateToProps = (state) => {
   let processNoise;
   let continuousAdjustment;
   let adjustmentThreshold;
-  const seated = state.chairs.panel.seated;
+  const seated = state.algorithms.kmeans.seated;
   let active;
   let gtSeated = false;
   let gtGender = undefined;
@@ -58,7 +58,7 @@ const mapStateToProps = (state) => {
       gtWeight = groundTruth.weight;
     }
 
-    const performance = state.chairs.panel.performance;
+    const performance = state.algorithms.kmeans.performance;
     if (performance !== undefined) {
       tn = performance.tn;
       fp = performance.fp;
