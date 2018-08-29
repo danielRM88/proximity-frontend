@@ -20,6 +20,9 @@ module.exports = {
       }
     ]
   },
+  externals: {
+    'config': JSON.stringify(require('./config/config.json'))
+  },
   devServer: {
     historyApiFallback: true,
   },

@@ -1,8 +1,11 @@
 import request from 'superagent';
+var config = require('config');
+
+const server = config.serverUrl;
 
 export function getBeaconDataFromChairService(chairId, limit, success, error) {
   request
-    .get('http://localhost:3000/beacons/fetch_data')
+    .get(server+'/beacons/fetch_data')
     .set('Content-Type', 'application/json')
     .query({ chair_id: chairId, limit: limit })
     .end((err, res) => {
@@ -17,7 +20,7 @@ export function getBeaconDataFromChairService(chairId, limit, success, error) {
 
 export function getBeaconDataService(beacons, limit, success, error) {
   request
-    .get('http://localhost:3000/beacons/fetch_data')
+    .get(server+'/beacons/fetch_data')
     .set('Content-Type', 'application/json')
     .query({ beacons_ids: `[${beacons}]`, limit: limit })
     .end((err, res) => {
@@ -32,7 +35,7 @@ export function getBeaconDataService(beacons, limit, success, error) {
 
 export function createBeaconService(beacon, success, error) {
   request
-    .post('http://localhost:3000/beacons')
+    .post(server+'/beacons')
     .set('Content-Type', 'application/json')
     .send({ beacon: beacon })
     .end((err, res) => {
@@ -47,7 +50,7 @@ export function createBeaconService(beacon, success, error) {
 
 export function getBeaconsService(data, success, error) {
   request
-    .get('http://localhost:3000/beacons')
+    .get(server+'/beacons')
     .set('Content-Type', 'application/json')
     .end((err, res) => {
       if (err) {
@@ -61,7 +64,7 @@ export function getBeaconsService(data, success, error) {
 
 export function getBeaconService(beaconId, success, error) {
   request
-    .get('http://localhost:3000/beacons/'+beaconId)
+    .get(server+'/beacons/'+beaconId)
     .set('Content-Type', 'application/json')
     .end((err, res) => {
       if (err) {
@@ -75,7 +78,7 @@ export function getBeaconService(beaconId, success, error) {
 
 export function updateBeaconService(beacon, success, error) {
   request
-    .put('http://localhost:3000/beacons/'+beacon.id)
+    .put(server+'/beacons/'+beacon.id)
     .set('Content-Type', 'application/json')
     .send({ beacon: beacon })
     .end((err, res) => {
@@ -90,7 +93,7 @@ export function updateBeaconService(beacon, success, error) {
 
 export function deleteBeaconService(beaconId, success, error) {
   request
-    .delete('http://localhost:3000/beacons/'+beaconId)
+    .delete(server+'/beacons/'+beaconId)
     .set('Content-Type', 'application/json')
     .end((err, res) => {
       if (err) {

@@ -30,7 +30,7 @@ function getKMeansDataMiddlewareAction(next, action) {
     next(getKMeansDataSuccess(response.chair_id, response.data, response.seated, response.performance));
   };
 
-  getKMeansDataService(action.payload.chairId, 20, success, error);
+  getKMeansDataService(action.payload.chairId, 1, success, error);
 };
 
 export default algorithmsMiddleware;

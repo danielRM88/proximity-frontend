@@ -18,7 +18,7 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = (dispatch) => ({
   refreshKMeansDataRequest: (chairId) => { 
     if(chairId !== undefined) {
-      dispatch(refreshKMeansDataRequest(chairId, 20));
+      dispatch(refreshKMeansDataRequest(chairId, 1));
     }
   }
 });

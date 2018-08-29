@@ -30,7 +30,7 @@ class KMeansPanel extends Component {
                   options={{
                     title: "K-means",
                     hAxis: { title: "", viewWindow: { min: -1, max: 1 } },
-                    vAxis: { title: "", viewWindow: { min: -80, max: -60 } },
+                    vAxis: { title: "", viewWindow: { min: -100, max: -50 } },
                     legend: { position: "none" },
                     seriesType: 'scatter',
                     interpolateNulls: true,
