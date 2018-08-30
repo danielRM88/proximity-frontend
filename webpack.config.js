@@ -1,4 +1,9 @@
 const HtmlWebPackPlugin = require("html-webpack-plugin");
+const configFile = JSON.stringify(require('./config/config.json'));
+console.log(process.env.NODE_ENV);
+if (process.env.NODE_ENV === "development") {
+  configFile = JSON.stringify(require('./config/config.dev.json'));
+}
 
 module.exports = {
   module: {
@@ -21,7 +26,7 @@ module.exports = {
     ]
   },
   externals: {
-    'config': JSON.stringify(require('./config/config.json'))
+    'config': configFile
   },
   devServer: {
     historyApiFallback: true,
