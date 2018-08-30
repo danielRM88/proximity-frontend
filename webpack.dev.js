@@ -1,5 +1,5 @@
 const HtmlWebPackPlugin = require("html-webpack-plugin");
-const configFile = JSON.stringify(require('./config/config.json'));
+configFile = JSON.stringify(require('./config/config.dev.json'));
 
 module.exports = {
   module: {
