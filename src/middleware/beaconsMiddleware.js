@@ -28,6 +28,7 @@ import { GET_BEACONS_REQUEST,
          GET_BEACON_DATA_FROM_CHAIR_REQUEST, 
          REFRESH_BEACON_DATA_REQUEST } from '../actions/beaconsActions';
 import { setMessage, removeMessage } from '../actions/messagesActions';
+import { setRedirectTrue } from '../actions/appActions';
 import { browserHistory, hashHistory } from 'react-router-dom';
 import store from "../store/store";
 import { processErrorMessages } from '../utility/util';
@@ -97,8 +98,9 @@ function createBeaconMiddlewareAction(next, action) {
   };
 
   const success = (response) => {
-    next(setMessage(["Beacon created successfully"], "success")); // not gonna show because of route change ??? how to fix ???
     next(createBeaconSuccess(response));
+    next(setRedirectTrue());
+    next(setMessage(["Beacon created successfully"], "success")); // not gonna show because of route change ??? how to fix ???
     // history = createHistory();
     // history.push('/beacons');
   };

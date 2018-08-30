@@ -14,14 +14,18 @@ import ChairPanelContainer from './containers/chairs/ChairPanelContainer';
 import { getBeaconsRequest, getBeaconRequest, getBeaconDataRequest, getBeaconDataFromChairRequest } from './actions/beaconsActions';
 import { getChairsRequest, getChairRequest, getChairDataRequest } from './actions/chairsActions';
 import { getKMeansDataRequest } from './actions/algorithmsActions';
+import { setRedirectFalse } from './actions/appActions';
 
 import createHistory from "history/createBrowserHistory";
 import store from "./store/store";
 import { removeMessage } from "./actions/messagesActions";
+import PropsRoute from "./components/PropsRoute";
 
 const history = createHistory();
 const location = history.location;
 const unlisten = history.listen((location, action) => {
+  console.log("listening");
+  store.dispatch(setRedirectFalse());
   store.dispatch(removeMessage());
 })
 
@@ -42,7 +46,7 @@ export default () => {
               store.dispatch(getBeaconsRequest());
               return <BeaconListContainer />
         }}/>
-        <Route exact path='/chairs/new' component={ChairNewContainer}/>
+        <Route path='/chairs/new' component={ChairNewContainer}/>
         <Route exact path='/chairs/:id/edit' render={ (props) => {
               store.dispatch(getChairRequest(props.match.params.id));
               return <ChairEditContainer />

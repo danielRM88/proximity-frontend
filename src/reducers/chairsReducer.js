@@ -131,7 +131,9 @@ const chairs = (state = initialState, action) => {
         edit: {...state.edit, ...action.payload}
       });
     case DELETE_CHAIR_REQUEST:
-      return state;
+      return Object.assign({}, state, {
+        index: {...state.index, ...action.payload}
+      });
     case DELETE_CHAIR_SUCCESS:
       return Object.assign({}, state, {
         index: {...state.index, ...action.payload}

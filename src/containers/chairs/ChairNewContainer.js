@@ -4,9 +4,11 @@ import { createChairRequest } from '../../actions/chairsActions';
 
 const mapStateToProps = (state) => {
   const loading = state.chairs.new.loading;
+  const redirect = state.app.redirect;
 
   return ({
-    loading
+    loading,
+    redirect
   })
 };
 

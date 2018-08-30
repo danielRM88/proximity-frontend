@@ -43,9 +43,13 @@ import { GET_CHAIRS_REQUEST,
          UPDATE_FILTER_PROCESS_ERROR_REQUEST,
          UPDATE_GROUND_TRUTH_REQUEST } from '../actions/chairsActions';
 import { setMessage, removeMessage } from '../actions/messagesActions';
+import { setRedirectTrue } from '../actions/appActions';
 import { browserHistory, hashHistory } from 'react-router-dom';
 import { processErrorMessages } from '../utility/util';
 import store from "../store/store";
+import createBrowserHistory from  'history/createBrowserHistory'
+
+const customHistory = createBrowserHistory()
 
 const chairsMiddleware = store => next => action => {
   next(action)
@@ -207,8 +211,9 @@ function createChairMiddlewareAction(next, action) {
   };
 
   const success = (response) => {
-    next(setMessage(["Chair created successfully"], "success")); // not gonna show because of route change ??? how to fix ???
     next(createChairSuccess(response));
+    next(setRedirectTrue());
+    next(setMessage(["Chair created successfully"], "success")); // not gonna show because of route change ??? how to fix ???
     // history = createHistory();
     // history.push('/chairs');
   };
@@ -260,6 +265,7 @@ function updateChairMiddlewareAction(next, action) {
   const success = () => {
     next(setMessage(["Chair updated successfully"], "success")); // not gonna show because of route change ??? how to fix ???
     next(updateChairSuccess());
+    // customHistory.push('/chairs');
     // if (action.redirect) {
     //   hashHistory.push('/chairs/'+action.payload.chair.id;
     // }

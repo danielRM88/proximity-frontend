@@ -197,6 +197,7 @@ export function createChairRequest(chair) {
     type: CREATE_CHAIR_REQUEST,
     payload: {
       chair,
+      redirect: false,
       loading: true
     }
   }
@@ -206,7 +207,8 @@ export function createChairSuccess() {
   return {
     type: CREATE_CHAIR_SUCCESS,
     payload: {
-      loading: false
+      loading: false,
+      redirect: true
     }
   }
 }
@@ -216,6 +218,7 @@ export function createChairFailure(message) {
     type: CREATE_CHAIR_FAILURE,
     payload: {
       loading: false,
+      redirect: false,
       message
     }
   }

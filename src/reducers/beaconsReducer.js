@@ -80,7 +80,9 @@ const beacons = (state = initialState, action) => {
         edit: {...state.edit, ...action.payload}
       });
     case DELETE_BEACON_REQUEST:
-      return state;
+      return Object.assign({}, state, {
+        index: {...state.edit, ...action.payload}
+      });
     case DELETE_BEACON_SUCCESS:
       return Object.assign({}, state, {
         index: {...state.edit, ...action.payload}

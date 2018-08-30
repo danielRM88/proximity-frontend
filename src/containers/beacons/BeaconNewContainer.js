@@ -4,6 +4,7 @@ import { createBeaconRequest } from '../../actions/beaconsActions';
 
 const mapStateToProps = (state) => {
   const loading = state.beacons.new.loading;
+  const redirect = state.app.redirect;
   const chairs = state.chairs.index.chairs;
 
   let selectedOption = {value: "", label: "No Chair"};
@@ -18,6 +19,7 @@ const mapStateToProps = (state) => {
   return ({
     loading,
     selectedOption,
+    redirect,
     selectOptions
   })
 };
