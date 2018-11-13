@@ -14,7 +14,7 @@ const mapStateToProps = (state) => {
   if (predictions !== undefined && chair!== undefined && chair.has_filter) {
     maxMeasurements = predictions.length;
     if (maxMeasurements > 0) {
-      data = [["", "Output"]];
+      data = [["", "State estimate"]];
       variance = [["", "P"]];
     }
     predictions.map((prediction, index) => {

@@ -48,9 +48,9 @@ class FilterPanel extends Component {
                   data={variance}
                   width="100%"
                   options={{
-                    title: "Variance of the state prediction error",
+                    title: "Variance of the state estimation error",
                     hAxis: { title: "", viewWindow: { min: 0, max: limit } },
-                    vAxis: { title: "", viewWindow: { min: 0, max: 1 } },
+                    vAxis: { title: "", viewWindow: { min: 0, max: 10 } },
                     curveType: "function",
                     legend: { position: "bottom" },
                     interpolateNulls: true
